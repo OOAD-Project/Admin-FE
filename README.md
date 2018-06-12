@@ -1,4 +1,4 @@
-# EasyOrder Admin E
+# EasyOrder Admin FE
 
 bash
 ```
