@@ -13,7 +13,7 @@ export default {
       define: {
         'BASE_URL': '/Admin-FE/'
       },
-      publicPath: '/Admin-FE/static/'
+      publicPath: '/Admin-FE/'
     }
   },
   alias: {
