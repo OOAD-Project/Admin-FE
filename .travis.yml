@@ -42,3 +42,7 @@ after_script:
   - git add -A
   - git commit -m "Deploy"
   - git push -f "https://${GH_TOKEN}@github.com/OOAD-Project/Admin-FE.git" master:gh-pages
+
+branches:
+  only:
+    - master
