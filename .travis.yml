@@ -1,0 +1,47 @@
+language: node_js
+
+node_js:
+  - "8"
+
+env:
+  matrix:
+    - TEST_TYPE=lint
+    - TEST_TYPE=build
+    - TEST_TYPE=test-all
+    - TEST_TYPE=test-dist
+
+addons:
+  apt:
+    packages:
+      - xvfb
+
+install:
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+  - yarn install
+
+before_script:
+  - rm -rf dist/
+
+script:
+  - |
+    if [ "$TEST_TYPE" = lint ]; then
+      yarn run lint
+    elif [ "$TEST_TYPE" = build ]; then
+      yarn run build
+    elif [ "$TEST_TYPE" = test-all ]; then
+      yarn run test:all
+    elif [ "$TEST_TYPE" = test-dist ]; then
+      yarn run site
+      mv dist/* ./
+      php -S localhost:8000 &
+      DEBUG=* npm test .e2e.js
+    fi
+  - yarn run build
+
+after_script:
+  - cd dist
+  - git init
+  - git add -A
+  - git commit -m "Deploy"
+  - git push -f "https://${GH_TOKEN}@github.com/OOAD-Project/Admin-FE.git" master:gh-pages
