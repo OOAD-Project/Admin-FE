@@ -242,27 +242,27 @@ class BasicLayout extends React.PureComponent {
             <GlobalFooter
               links={[
                 {
-                  key: 'Pro 首页',
-                  title: 'Pro 首页',
-                  href: 'http://pro.ant.design',
+                  key: 'org',
+                  title: '组织',
+                  href: 'https://github.com/OOAD-Project',
                   blankTarget: true,
                 },
                 {
-                  key: 'github',
+                  blankTarget: true,
+                  key: 'project',
                   title: <Icon type="github" />,
-                  href: 'https://github.com/ant-design/ant-design-pro',
-                  blankTarget: true,
+                  href: 'https://github.com/OOAD-Project/Admin-FE',
                 },
                 {
-                  key: 'Ant Design',
-                  title: 'Ant Design',
-                  href: 'http://ant.design',
+                  key: 'help',
+                  title: '帮助说明',
+                  href: 'https://ooad-project.github.io/DashBoard/',
                   blankTarget: true,
                 },
               ]}
               copyright={
                 <Fragment>
-                  Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品
+                  Copyright <Icon type="copyright" /> 2018 OOAD-Project
                 </Fragment>
               }
             />
