@@ -15,17 +15,10 @@ const proxy = {
   // 支持值为 Object 和 Array
   'GET /api/currentUser': {
     $desc: '获取当前用户接口',
-    $params: {
-      pageSize: {
-        desc: '分页',
-        exp: 2,
-      },
-    },
     $body: {
       name: 'Serati Ma',
       avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
-      userid: '00000001',
-      notifyCount: 12,
+      userid: '00000001'
     },
   },
   // GET POST 可省略

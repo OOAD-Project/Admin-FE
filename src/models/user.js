@@ -23,7 +23,7 @@ export default {
         payload: {
           name,
           avatar,
-          userid
+          userid,
         },
       });
     },

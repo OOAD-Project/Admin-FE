@@ -44,8 +44,9 @@ for (let i = 0; i < 7; i += 1) {
 
 const Yuan = ({ children }) => (
   <span
+    /* eslint-disable-line react/no-danger */
     dangerouslySetInnerHTML={{ __html: yuan(children) }}
-  /> /* eslint-disable-line react/no-danger */
+  />
 );
 
 @connect(({ chart, loading }) => ({
