@@ -11,12 +11,13 @@ const { UserName, Password, Submit } = Login;
   submitting: loading.effects['login/login'],
 }))
 export default class LoginPage extends Component {
-  handleSubmit = (err, values) => {
+  handleSubmit = (err, { username, password }) => {
     if (!err) {
       this.props.dispatch({
         type: 'login/login',
         payload: {
-          ...values,
+          username,
+          password,
         },
       });
     }
@@ -32,7 +33,6 @@ export default class LoginPage extends Component {
       <div className={styles.main}>
         <Login onSubmit={this.handleSubmit}>
           {login.status === 'error' &&
-            login.type === 'account' &&
             !submitting &&
             this.renderMessage('账户或密码错误（admin/888888）')}
           <UserName name="username" placeholder="admin" />

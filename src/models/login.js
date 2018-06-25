@@ -12,13 +12,13 @@ export default {
 
   effects: {
     *login({ payload }, { call, put }) {
-      const response = yield call(fakeAccountLogin, payload);
+      const { status } = yield call(fakeAccountLogin, payload);
       yield put({
         type: 'changeLoginStatus',
-        payload: response,
+        payload: { status },
       });
       // Login successfully
-      if (response.status === 'ok') {
+      if (status === 'ok') {
         reloadAuthorized();
         yield put(routerRedux.push('/'));
       }
@@ -34,10 +34,7 @@ export default {
       } finally {
         yield put({
           type: 'changeLoginStatus',
-          payload: {
-            status: false,
-            currentAuthority: 'guest',
-          },
+          payload: { status: false },
         });
         reloadAuthorized();
         yield put(routerRedux.push('/user/login'));
@@ -47,11 +44,10 @@ export default {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      setAuthority(payload.currentAuthority);
+      setAuthority(payload.status === 'ok' ? 'admin' : 'guest');
       return {
         ...state,
         status: payload.status,
-        type: payload.type,
       };
     },
   },
