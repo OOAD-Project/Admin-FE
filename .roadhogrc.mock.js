@@ -73,24 +73,11 @@ const proxy = {
   'GET /api/profile/advanced': getProfileAdvancedData,
   'POST /api/login/account': (req, res) => {
     const { password, username } = req.body;
-    if (password === '888888' && username === 'admin') {
-      res.send({
-        status: 'ok',
-        currentAuthority: 'admin',
-      });
+    if (password === 'admin' && username === 'admin') {
+      res.send({ status: 'ok' });
       return;
     }
-    if (password === '123456' && username === 'user') {
-      res.send({
-        status: 'ok',
-        currentAuthority: 'user',
-      });
-      return;
-    }
-    res.send({
-      status: 'error',
-      currentAuthority: 'guest',
-    });
+    res.send({ status: 'error' });
   },
   'POST /api/register': (req, res) => {
     res.send({ status: 'ok', currentAuthority: 'user' });
