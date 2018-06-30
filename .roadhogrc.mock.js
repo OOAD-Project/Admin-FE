@@ -64,13 +64,19 @@ const proxy = {
   'GET /api/fake_chart_data': getFakeChartData,
   'GET /api/profile/basic': getProfileBasicData,
   'GET /api/profile/advanced': getProfileAdvancedData,
-  'POST /api/login/account': (req, res) => {
-    const { password, username } = req.body;
-    if (password === 'admin' && username === 'admin') {
+  'POST /api/login': (req, res) => {
+    const { psw, name } = req.body;
+    if (psw === 'Gzm20125' && name === 'root') {
       res.send({ status: 'ok' });
       return;
     }
     res.send({ status: 'error' });
+  },
+  'GET /api/basic_static': {
+    "total_turnover": 2000,
+    "total_reservation": 300,
+    "total_payment": 180,
+    "reservation_payment_ratio": 0.6
   },
   'POST /api/register': (req, res) => {
     res.send({ status: 'ok', currentAuthority: 'user' });

@@ -12,13 +12,13 @@ export default {
 
   effects: {
     *login({ payload }, { call, put }) {
-      const { status } = yield call(fakeAccountLogin, payload);
+      const { data } = yield call(fakeAccountLogin, payload);
       yield put({
         type: 'changeLoginStatus',
-        payload: { status },
+        payload: { status: data.status },
       });
       // Login successfully
-      if (status === 'ok') {
+      if (data.status === 'ok') {
         reloadAuthorized();
         yield put(routerRedux.push('/'));
       }

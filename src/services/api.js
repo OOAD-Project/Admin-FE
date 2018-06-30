@@ -1,5 +1,6 @@
 import { stringify } from 'qs';
 import request from '../utils/request';
+import xios from './axios';
 
 export async function queryProjectNotice() {
   return request('/api/project/notice');
@@ -41,7 +42,11 @@ export async function fakeSubmitForm(params) {
 }
 
 export async function fakeChartData() {
-  return request('/api/fake_chart_data');
+  return xios.get('/api/fake_chart_data');
+}
+
+export async function basicCardData() {
+  return xios.get('/api/basic_static');
 }
 
 export async function queryTags() {
@@ -61,10 +66,11 @@ export async function queryFakeList(params) {
 }
 
 export async function fakeAccountLogin(params) {
-  return request('/api/login/account', {
-    method: 'POST',
-    body: params,
-  });
+  // return request('/api/login', {
+  //   method: 'POST',
+  //   body: params,
+  // });
+  return xios.post('/api/login', params);
 }
 
 export async function fakeRegister(params) {

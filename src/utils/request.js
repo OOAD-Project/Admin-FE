@@ -43,6 +43,7 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options) {
+  // url = 'http://165.227.52.248' + url;
   const defaultOptions = {
     credentials: 'include',
   };

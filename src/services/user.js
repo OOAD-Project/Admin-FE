@@ -5,5 +5,10 @@ export async function query() {
 }
 
 export async function queryCurrent() {
-  return request('/api/currentUser');
+  // return request('/api/currentUser');
+  return {
+    name: 'Admin',
+    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+    userid: '00000001'
+  };
 }

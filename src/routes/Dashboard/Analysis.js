@@ -132,6 +132,7 @@ export default class Analysis extends Component {
       salesTypeData,
       salesTypeDataOnline,
       salesTypeDataOffline,
+      basic
     } = chart;
 
     const salesPieData =
@@ -191,7 +192,7 @@ export default class Analysis extends Component {
         render: text => <a href="/">{text}</a>,
       },
       {
-        title: '用户数',
+        title: '点餐数',
         dataIndex: 'count',
         key: 'count',
         sorter: (a, b) => a.count - b.count,
@@ -253,79 +254,57 @@ export default class Analysis extends Component {
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
-              title="总销售额"
+              title="今日总销售额"
               action={
-                <Tooltip title="指标说明">
+                <Tooltip title="营业时期销售总额">
                   <Icon type="info-circle-o" />
                 </Tooltip>
               }
-              total={() => <Yuan>126560</Yuan>}
-              footer={<Field label="日均销售额" value={`￥${numeral(12423).format('0,0')}`} />}
+              total={() => <Yuan>{basic.total_turnover}</Yuan>}
               contentHeight={46}
             >
-              <Trend flag="up" style={{ marginRight: 16 }}>
-                周同比<span className={styles.trendText}>12%</span>
-              </Trend>
-              <Trend flag="down">
-                日环比<span className={styles.trendText}>11%</span>
-              </Trend>
             </ChartCard>
           </Col>
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
-              title="访问量"
+              title="总订单数"
               action={
-                <Tooltip title="指标说明">
+                <Tooltip title="营业时期总订单数">
                   <Icon type="info-circle-o" />
                 </Tooltip>
               }
-              total={numeral(8846).format('0,0')}
-              footer={<Field label="日访问量" value={numeral(1234).format('0,0')} />}
+              total={numeral(basic.total_reservation).format('0,0')}
               contentHeight={46}
             >
-              <MiniArea color="#975FE4" data={visitData} />
             </ChartCard>
           </Col>
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
-              title="支付笔数"
+              title="总订单完成数"
               action={
-                <Tooltip title="指标说明">
+                <Tooltip title="营业时期总订单完成数">
                   <Icon type="info-circle-o" />
                 </Tooltip>
               }
-              total={numeral(6560).format('0,0')}
-              footer={<Field label="转化率" value="60%" />}
+              total={numeral(basic.total_payment).format('0,0')}
               contentHeight={46}
             >
-              <MiniBar data={visitData} />
             </ChartCard>
           </Col>
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
-              title="运营活动效果"
+              title="订单转化率"
               action={
-                <Tooltip title="指标说明">
+                <Tooltip title="完成数 / 订单总数">
                   <Icon type="info-circle-o" />
                 </Tooltip>
               }
-              total="78%"
-              footer={
-                <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
-                  <Trend flag="up" style={{ marginRight: 16 }}>
-                    周同比<span className={styles.trendText}>12%</span>
-                  </Trend>
-                  <Trend flag="down">
-                    日环比<span className={styles.trendText}>11%</span>
-                  </Trend>
-                </div>
-              }
+              total={`${basic.reservation_payment_ratio * 100}%`}
               contentHeight={46}
             >
-              <MiniProgress percent={78} strokeWidth={8} target={80} color="#13C2C2" />
             </ChartCard>
           </Col>
         </Row>
@@ -334,50 +313,9 @@ export default class Analysis extends Component {
           <div className={styles.salesCard}>
             <Tabs tabBarExtraContent={salesExtra} size="large" tabBarStyle={{ marginBottom: 24 }}>
               <TabPane tab="销售额" key="sales">
-                <Row>
-                  <Col xl={16} lg={12} md={12} sm={24} xs={24}>
-                    <div className={styles.salesBar}>
-                      <Bar height={295} title="销售额趋势" data={salesData} />
-                    </div>
-                  </Col>
-                  <Col xl={8} lg={12} md={12} sm={24} xs={24}>
-                    <div className={styles.salesRank}>
-                      <h4 className={styles.rankingTitle}>门店销售额排名</h4>
-                      <ul className={styles.rankingList}>
-                        {rankingListData.map((item, i) => (
-                          <li key={item.title}>
-                            <span className={i < 3 ? styles.active : ''}>{i + 1}</span>
-                            <span>{item.title}</span>
-                            <span>{numeral(item.total).format('0,0')}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </Col>
-                </Row>
-              </TabPane>
-              <TabPane tab="访问量" key="views">
-                <Row>
-                  <Col xl={16} lg={12} md={12} sm={24} xs={24}>
-                    <div className={styles.salesBar}>
-                      <Bar height={292} title="访问量趋势" data={salesData} />
-                    </div>
-                  </Col>
-                  <Col xl={8} lg={12} md={12} sm={24} xs={24}>
-                    <div className={styles.salesRank}>
-                      <h4 className={styles.rankingTitle}>门店访问量排名</h4>
-                      <ul className={styles.rankingList}>
-                        {rankingListData.map((item, i) => (
-                          <li key={item.title}>
-                            <span className={i < 3 ? styles.active : ''}>{i + 1}</span>
-                            <span>{item.title}</span>
-                            <span>{numeral(item.total).format('0,0')}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </Col>
-                </Row>
+                <div className={styles.salesBar}>
+                  <Bar height={295} title="销售额趋势" data={salesData} />
+                </div>
               </TabPane>
             </Tabs>
           </div>
